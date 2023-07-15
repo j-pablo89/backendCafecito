@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import path from "path";
 import 'dotenv/config';
 import './src/database/dbConnection';
+import productosRouter from './src/routes/productos.routes';
 
 //usar un puerto
 const app = express();
@@ -13,7 +14,7 @@ app.listen(app.get('port'), ()=>{
     console.log('Estoy en el puerto: '+app.get('port'));
 });
 
-//middlewares: funciones que se ejecutan antes de las rutas
+//middlewares: funciones que se ejecutan antes de las rutas (funciones de configuracion del servidor de Backend)
 app.use(cors()); // permitir conexiones remotas
 app.use(express.json()) // permitir a mi aplicacion recibir objetos de tipo json en los request
 app.use(morgan('dev')); // me muestra en la consola informacion extra de las solicitudes GET, POST, PUT, etc.
@@ -23,3 +24,5 @@ app.use(express.static(path.join(__dirname, '/public'))); // esto nos permite po
 
 
 //rutas
+// http://localhost:4000/apicafe/productos
+app.use('/apicafe', productosRouter);
