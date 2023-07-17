@@ -29,7 +29,7 @@ router
         .withMessage('El precio es un dato obligatorio')
         .isNumeric()
         .withMessage('El precio debe ser numérico')
-        .custom((value)=>{
+        .custom((value)=>{   //Custom es para personalizar una funcion
             if(value >= 1 && value <= 10000){
                 return true;
             }else{
@@ -39,8 +39,13 @@ router
       check("imagen")
         .notEmpty()
         .withMessage('La URL de la imagen es obligatoria')
-        .matches(/^https?:\/\/(?:[a-zA-Z]+)(?:\.[a-zA-Z]+)+\S*(?:\.jpg|\.jpeg|\.png|\.bpm|\.gif)$/)
-        .withMessage('Debe ser una URL de imagen valida, con extension (png|jpe?g|gif|bmp)')
+        .matches(/^https?:\/\/(?:[a-zA-Z]+)(?:\.[a-zA-Z]+)+\S*(?:\.jpg|\.jpeg|\.png|\.bpm|\.gif)$/) //Usamos este metodo para expresion regular de url
+        .withMessage('Debe ser una URL de imagen valida, con extension (png|jpe?g|gif|bmp)'),
+      check("categoria")
+        .notEmpty()
+        .withMessage('La categoria es obligatoria')
+        .isIn(["bebita caliente","bebida fria","dulce","salado"]) //Usamos este metodo cuando tenemos opciones de un select, volcamos dichas opciones en un ARRAY
+        .withMessage('Debe ingresar una categoria valida')
     ],
     crearProducto
   ); //tiene dos funciones GET y POST
