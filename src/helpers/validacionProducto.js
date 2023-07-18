@@ -27,7 +27,7 @@ check("imagen")
 check("categoria")
   .notEmpty()
   .withMessage('La categoria es obligatoria')
-  .isIn(["bebita caliente","bebida fria","dulce","salado"]) //Usamos este metodo cuando tenemos opciones de un select, volcamos dichas opciones en un ARRAY
+  .isIn(["bebida caliente","bebida fria","dulce","salado"]) //Usamos este metodo cuando tenemos opciones de un select, volcamos dichas opciones en un ARRAY
   .withMessage('Debe ingresar una categoria valida'),
   (req, res, next)=>{ resultadoValidacion(req,res,next)}
 ]
