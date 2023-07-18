@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, '/public'))); // esto nos permite po
 
 
 //rutas
-// http://localhost:4000/apicafe/productos
+// http://localhost:4000/apicafe/
 app.use('/apicafe', productosRouter);
-// http://localhost:4000/apicafe/auth/usuarios
+// http://localhost:4000/apicafe/auth/
 app.use('/apicafe/auth', usuariosRouter);
