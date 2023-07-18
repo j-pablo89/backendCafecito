@@ -50,3 +50,32 @@ export const crearUsuario = async (req, res) => {
         });
     }
 };
+export const login = async (req, res) => {
+    try {
+        // buscar si existe el mail en nuestra collection de usuarios
+        let usuario = await Usuario.findOne({email: req.body.email});
+        // si el usuario No existe
+        if(!usuario){
+            return res.status(404).json({
+                mensaje: 'Correo o contraseña invalida - correo'
+            });
+        }
+        //preguntar su la contraseña corresponde con el usuario encontrado
+        const passwordValido = bcrypt.compareSync(req.body.password, usuario.password); // devuelve true si los datos son iguales, caso contrario devuelve false
+        if(!passwordValido){
+            return res.status(400).json({
+                mensaje: 'Correo o contraseña invalida - password'
+            });
+        }
+        //responder al frontend que debe loguear al usuario
+        res.status(200).json({
+            mensaje: 'Usuario Correcto',
+            nombreUsuario: usuario.nombreUsuario
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            mensaje: 'Error al intentar loguear un usuario',
+        });
+    }
+}
