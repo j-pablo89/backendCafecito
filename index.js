@@ -5,6 +5,7 @@ import path from "path";
 import 'dotenv/config';
 import './src/database/dbConnection';
 import productosRouter from './src/routes/productos.routes';
+import usuariosRouter from './src/routes/usuarios.routes'; // se puede usar cualquier palabra para traer con el import desde import default
 
 //usar un puerto
 const app = express();
@@ -26,3 +27,5 @@ app.use(express.static(path.join(__dirname, '/public'))); // esto nos permite po
 //rutas
 // http://localhost:4000/apicafe/productos
 app.use('/apicafe', productosRouter);
+// http://localhost:4000/apicafe/auth/usuarios
+app.use('/apicafe/auth', usuariosRouter);
